@@ -19,6 +19,8 @@ namespace CastleGrimtol
             if (userInput == "Y")
             {
                 MyGame.PlayGame();
+                MyGame.Reset();
+                
 
             }
             else
