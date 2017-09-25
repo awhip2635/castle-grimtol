@@ -19,7 +19,7 @@ namespace CastleGrimtol.Project
         public void Setup()
         {
             //Build Rooms
-            Room room1 = new Room("You Have Entered: The Dark Cavern", "You can't see too much, but notice two entryways. You also notice bear mace, and a sword on the ground.");
+            Room room1 = new Room("You Have Entered: The Dark Cavern", "You can't see too much, but notice two entryways. You also notice bear mace on the ground.");
             Room room2 = new Room("You Have Entered: The Bear's Lair", "Oh no! You have awoken a very angry momma bear");
             Room room3 = new Room("You Have Entered: Room of Nothing", "There seems to be nothing living here, but in the distance you hear eerie noises. Proceed with caution!");
             Room room4 = new Room("You Have Entered: Abyss of Death", "You took a wrong turn and fell into the abyss of death. See you in the afterlife.");
@@ -62,12 +62,12 @@ namespace CastleGrimtol.Project
             {
                 System.Console.WriteLine("Alright, you've got your fists!");
             }
-            System.Console.WriteLine("Alright Where to?");
+            System.Console.WriteLine("Alright Where to? You can travel 'E'");
             string secondInput = System.Console.ReadLine().ToUpper();
             if (secondInput == "W" || secondInput == "N" || secondInput == "S")
             {
                 System.Console.WriteLine("Can't go that way, try again.");
-                System.Console.WriteLine("Alright Where to?");
+                System.Console.WriteLine("Alright Where to? You can travel 'E'");
                 string seconInput = System.Console.ReadLine().ToUpper();
                 if (secondInput == "H" || secondInput == "h")
                 {
@@ -95,31 +95,128 @@ namespace CastleGrimtol.Project
                             System.Console.WriteLine("You still Cant go that way.");
 
                         }
-                        else if(Redemption == "E")
+                        else if (Redemption == "E")
                         {
                             Go(Redemption);
                         }
-                        else if(Redemption == "W")
+                        else if (Redemption == "W")
                         {
                             System.Console.WriteLine("You want to give up already? youre a loser");
                         }
-                        else if(Redemption == "H")
+                        else if (Redemption == "H")
                         {
                             ListCommands();
                         }
-                        else if(Redemption == "Q")
+                        else if (Redemption == "Q")
                         {
                             System.Console.WriteLine("Why Quit Now!! You're so close.");
                         }
                     }
-                    else if(UserChoice == "W")
+                    else if (UserChoice == "W")
                     {
                         System.Console.WriteLine("You want to give up already? Youre a loser");
+                    }
+                    else if (UserChoice == "E")
+                    {
+                        Go(UserChoice);
+                        System.Console.WriteLine(CurrentRoom.Name + "- " + CurrentRoom.Description);
+                        System.Console.WriteLine("Alright, Where to? Your Possible Exits are 'W' 'E' or 'S'");
+                        string nextChoice = System.Console.ReadLine().ToUpper();
+                        Go(nextChoice);
+                        System.Console.WriteLine(CurrentRoom.Name + "- " + CurrentRoom.Description);
+
+                    }
+                    else if (UserChoice == "H")
+                    {
+                        ListCommands();
                     }
                 }
                 else
                 {
                     System.Console.WriteLine("Wrong Choice, you were mauled. Game over.");
+                }
+            }
+            if (CurrentRoom.Description == "The Bear seems to have ran off!")
+            {
+                System.Console.WriteLine("Alright Where, to? You can only go 'E'");
+                string UserChoice = System.Console.ReadLine().ToUpper();
+                if (UserChoice == "H")
+                {
+                    ListCommands();
+                    string secondChoice = System.Console.ReadLine().ToUpper();
+                    if (secondChoice == "E")
+                    {
+                        Go(secondChoice);
+                        System.Console.WriteLine("Alright, Where to? You can go 'E' or 'S'");
+                        string thirdChoice = System.Console.ReadLine().ToUpper();
+                        if (thirdChoice == "E" || thirdChoice == "S")
+                        {
+                            Go(thirdChoice);
+                        }
+                        else if (thirdChoice == "Q")
+                        {
+                            System.Console.WriteLine("You are a quitter");
+                        }
+                        else if (thirdChoice == "H")
+                        {
+                            ListCommands();
+                            System.Console.WriteLine("Alright Where, to? You can go 'E' or 'S'");
+                            string fourthChoice = System.Console.ReadLine();
+                            if (fourthChoice == "E" || fourthChoice == "S")
+                            {
+                                Go(thirdChoice);
+                            }
+                            else
+                            {
+                                System.Console.WriteLine("The Bear tracked you down and mauled you. Game over");
+                            }
+
+                        }
+                        else
+                        {
+                            System.Console.WriteLine("The bear tracked you down and mauled you. Game over");
+                        }
+
+                    }
+                    else
+                    {
+                        System.Console.WriteLine("The Bear returned and ate you for dinner! Game Over");
+                    }
+                }
+                else if (UserChoice == "Q")
+                {
+                    System.Console.WriteLine("You are a quitter. You have to live with that.");
+                }
+                else if (UserChoice == "E")
+                {
+                    Go(UserChoice);
+                    System.Console.WriteLine(CurrentRoom.Name + "- " + CurrentRoom.Description);
+                    System.Console.WriteLine("Alright, Where to? You can Go 'E' or 'S'");
+                    string secondChoice = System.Console.ReadLine().ToUpper();
+                    if (secondChoice == "H")
+                    {
+                        ListCommands();
+                        string thirdChoice = System.Console.ReadLine().ToUpper();
+                        if (thirdChoice == "E" || thirdChoice == "S")
+                        {
+                            Go(thirdChoice);
+                        }
+                    }
+                    if (secondChoice == "Q")
+                    {
+                        System.Console.WriteLine("You are a quitter.");
+                    }
+                    if (secondChoice == "E" || secondChoice == "S")
+                    {
+                        Go(secondChoice);
+                        System.Console.WriteLine(CurrentRoom.Name + "- " + CurrentRoom.Description);
+
+                    }
+
+                }
+                else
+                {
+                    System.Console.WriteLine("The Bear returned and ate you for dinner. Game Over.");
                 }
             }
 
